@@ -1,30 +1,27 @@
-from attrs import frozen
-from json import load
+from attrs import define, field
 from qa_lib.components.common import CommonUtils
 from qa_lib.components.params import ParamLoader
-from qa_lib.components.chain import RippleClient, AssetManager, FAsset
-from qa_lib.components.cmd import UserBotCli
+from qa_lib.components.chain import RippleClient, RippleWallet, MasterAccountController, FAsset
+from qa_lib.components.cmd import UserCli
 
 
-@frozen
+@define
 class BaseUserBot:
-  user_id: str
-  params: ParamLoader
-  utils: CommonUtils
-  ripple_client: RippleClient
-  fasset: FAsset
-  asset_manager: AssetManager
-  user_bot_cli: UserBotCli
+    id: str
+    params: ParamLoader
+    utils: CommonUtils
+    ripple: RippleClient
+    fasset: FAsset
+    master_account_controller: MasterAccountController
+    cli: UserCli
 
-  @property
-  def secrets(self):
-    secrets_path = self.user_bot_cli.env['FASSET_USER_SECRETS']
-    return load(open(secrets_path, 'r'))
+    _wallet: RippleWallet = field(init = False)
+    personal_address: str = field(init = False)
 
-  @property
-  def native_address(self) -> str:
-    return self.secrets['user']['native']['address']
+    def __attrs_post_init__(self):
+        self._wallet = RippleWallet(self.ripple.client.url, self.cli.env['XRPL_SECRET'])
+        self.personal_address = self.master_account_controller.get_personal_account(self.address)
 
-  @property
-  def underlying_address(self) -> str:
-    return self.secrets['user'][self.params.asset_name]['address']
+    @property
+    def address(self) -> str:
+        return self._wallet.wallet.address

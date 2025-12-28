@@ -1,2 +1,2 @@
 from .ripple import RippleClient, RippleWallet
-from .native import NativeClient, NativeWallet, AssetManager, FAsset
+from .native import NativeClient, NativeWallet, MasterAccountController, FAsset

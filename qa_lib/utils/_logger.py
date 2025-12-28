@@ -11,7 +11,7 @@ LOGGING_CONFIG = {
     "formatters": {
         "standard": {
             "format": (
-                "%(asctime)s | %(levelname)-8s | " "%(name)s:%(lineno)d | %(message)s"
+                "%(asctime)s | %(levelname)-8s | %(name)s:%(lineno)d | %(message)s"
             ),
             "datefmt": "%Y-%m-%d %H:%M:%S",
         },
@@ -54,4 +54,4 @@ LOGGING_CONFIG = {
 
 
 logging.config.dictConfig(LOGGING_CONFIG)
-logger = logging.getLogger('FAssetQA')
+logger = logging.getLogger("FAssetQA")

@@ -1,29 +1,13 @@
 [os]
-node_path='/usr/local/bin/node'
+python_path = 'python'
 
 [contracts]
 path = './fasset-bots/packages/fasset-bots-core/fasset-deployment/coston2.json'
-asset_manager_abi = './fasset-bots/packages/fasset-bots-core/artifacts/contracts/userInterfaces/IAssetManager.sol/IAssetManager.json'
-fasset_abi = './fasset-bots/packages/fasset-bots-core/artifacts/contracts/userInterfaces/IFAsset.sol/IFAsset.json'
-
-[core_vault_manager]
-# transfer to core vault when higher than minted_uba / total_uba
-minted_uba_core_vault_tranfer_threshold_ratio = 0.75
-# return from core vault when lower than minted_uba / total_uba
-minted_uba_core_vault_return_threshold_ratio = 0.25
-# returning from core vault multiplier
-max_free_lots_factor_to_return_from_core_vault = 0.5
-
-[core_vault_agent_interacter_bot]
-interact_cycle_sleep_seconds = 300
-
-[core_vault_redeemer_bot]
-interact_cycle_sleep_seconds = 300
+fasset_address = '0x0b6A3645c240605887a5532109323A3E12273dc7'
+master_account_controller_abi_path = './smart_accounts_cli/artifacts/MasterAccountController.json'
+master_account_controller_address = '0x3ab31E2d943d1E8F47B275605E50Ff107f2F8393'
 
 [load_test]
-fasset_user_config_file_path = './fasset-bots-config/users/user{0}/config.json'
-fasset_user_secrets_file_path = './fasset-bots-config/users/user{0}/secrets.json'
+user_config_path = './accounts/users/user{0}/.env'
 user_min_xrp_balance = 50
-user_min_nat_balance = 1000
 user_target_xrp_balance = 1000
-user_target_nat_balance = 20000
