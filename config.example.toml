@@ -1,13 +1,13 @@
 [os]
-python_path = 'python'
+python_path = './.venv/bin/python3'
 
 [contracts]
-path = './fasset-bots/packages/fasset-bots-core/fasset-deployment/coston2.json'
+fasset_abi_path = './artifacts/IFAsset.json'
 fasset_address = '0x0b6A3645c240605887a5532109323A3E12273dc7'
-master_account_controller_abi_path = './smart_accounts_cli/artifacts/MasterAccountController.json'
+master_account_controller_abi_path = './smart_accounts_cli/artifacts/IMasterAccountController.json'
 master_account_controller_address = '0x3ab31E2d943d1E8F47B275605E50Ff107f2F8393'
 
 [load_test]
 user_config_path = './accounts/users/user{0}/.env'
-user_min_xrp_balance = 50
-user_target_xrp_balance = 1000
+user_min_xrp_balance = 20
+user_target_xrp_balance = 100

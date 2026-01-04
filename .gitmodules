@@ -1,3 +1,4 @@
 [submodule "smart-accounts-cli"]
 	path = smart_accounts_cli
 	url = git@gitlab.com:flarenetwork/smart-accounts/smart-accounts-cli.git
+	branch = upgrade

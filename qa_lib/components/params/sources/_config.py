@@ -9,10 +9,10 @@ class Os:
 
 @dataclass
 class ConfigContracts:
-    path: str
     fasset_address: str
+    fasset_abi_path: str
     master_account_controller_abi_path: str
-    master_account_controller_address: set
+    master_account_controller_address: str
 
 @dataclass
 class ConfigLoadTest:

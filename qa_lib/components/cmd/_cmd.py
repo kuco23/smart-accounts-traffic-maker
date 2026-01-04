@@ -1,5 +1,5 @@
-from attrs import define, field
 from typing import List, Optional
+from attrs import define, field
 from subprocess import Popen, PIPE
 
 

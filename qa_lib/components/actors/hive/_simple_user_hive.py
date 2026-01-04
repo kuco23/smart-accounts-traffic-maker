@@ -1,13 +1,12 @@
 from typing import List
-from random import choice
 from time import sleep
 from attrs import frozen
+import traceback
 from qa_lib.utils import logger
 from qa_lib.components.params import ParamLoader
 from qa_lib.components.chain import (
     RippleWallet,
     RippleClient,
-    NativeWallet,
     NativeClient,
     FAsset,
 )
@@ -19,14 +18,12 @@ XRP_DROP_FACTOR = 10**6
 NAT_WEI_FACTOR = 10**18
 CYCLE_SLEEP_SEC = 10
 
-
 @frozen
 class SimpleUserHive:
     params: ParamLoader
     ripple_rpc: RippleClient
     ripple_root: RippleWallet
     native_rpc: NativeClient
-    native_root: NativeWallet
     fasset: FAsset
     users: List[UserMinterAndRedeemer]
 
@@ -60,13 +57,12 @@ class SimpleUserHive:
             try:
                 self.run_user_step(i)
             except Exception as e:
-                logger.error(f"error when running user {i}:", e)
+                logger.error(f"error when running user {i}:", e, traceback.format_exc())
             sleep(CYCLE_SLEEP_SEC)
 
     def run_user_step(self, i: int):
         user = self.users[i]
-        agent_vault = choice(self.params.load_test_agent_vaults)
-        user.mint(agent_vault, MAX_MINTED_LOTS)
+        user.mint(MAX_MINTED_LOTS)
         user.redeem_all()
 
     def on_finish(self):

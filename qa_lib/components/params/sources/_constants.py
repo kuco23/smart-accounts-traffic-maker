@@ -1,15 +1,15 @@
 from os import getcwd
-
+from pathlib import Path
 
 class Constants:
 
     @property
     def run_dir(self) -> str:
-        return getcwd()
+        return str(Path(getcwd()) / 'smart_accounts_cli')
 
     @property
     def smart_accounts_cli_path(self) -> str:
-        return "./smart_accounts_cli/smart_accounts.py"
+        return "./smart_accounts.py"
 
     ##########################################################
     # should be configured dynamicaly

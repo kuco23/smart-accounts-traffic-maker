@@ -5,8 +5,8 @@ from ._user_cli_types import *
 
 class UserCliOutputParser(CmdParser):
     _re_encoding = r'^(0x[0-9a-fA-F]{64})$'
-    _re_bridge_instruction = r'^sent bridge instruction transaction: ([0-9A-F]{64})\w'
-    _re_bridge_mint_tx = r'^sent mint tx: ([0-9A-F]{64})\w'
+    _re_bridge_instruction = r'sent bridge instruction transaction: ([0-9A-F]{64})\n'
+    _re_bridge_mint_tx = r'sent mint tx: ([0-9A-F]{64})\n'
 
     def parse_encoding_response(self, msg: str) -> ParserOutput[CliEncodingResponse]:
         data = self._standardize_regex_output([self._re_encoding], msg)

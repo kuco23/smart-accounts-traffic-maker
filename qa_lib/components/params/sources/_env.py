@@ -1,4 +1,3 @@
-from typing import List
 from os import environ
 from dotenv import load_dotenv
 
@@ -25,6 +24,7 @@ class Env:
 
     @property
     def ripple_rpc_url(self) -> str:
+        load_dotenv()
         return environ.get("XRP_RPC_URL")
 
     @property
@@ -34,16 +34,8 @@ class Env:
     # load tests
 
     @property
-    def load_test_xrp_distributor_seed(self) -> str:
-        return self._required("LOAD_TEST_XRP_DISTRIBUTOR_SEED")
-
-    @property
-    def load_test_nat_distributor_pvk(self) -> str:
-        return self._required("LOAD_TEST_NAT_DISTRIBUTOR_PVK")
-
-    @property
-    def load_test_agent_vaults(self) -> List[str]:
-        return self._required("LOAD_TEST_AGENT_VAULTS").split()
+    def xrp_distributor_seed(self) -> str:
+        return self._required("XRP_DISTRIBUTOR_SEED")
 
     # helpers
 

@@ -81,4 +81,4 @@ class UserCli(Cmd, UserCliOutputParser):
 
     @staticmethod
     def _bridge_mint_args(transaction: str):
-        return ["bridge", "mint", transaction, "-w"]
+        return ["bridge", "mint-tx", transaction, "-w"]

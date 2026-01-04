@@ -174,13 +174,10 @@ media
 
 # temp
 temp/
-fasset-bots-config/
-
-logs/
-fasset-bots-logs/
+accounts/
 
 log/
-fasset-bots-qa-logs/
+smart-accounts-logs/
 
 .env.user-gen
 load-test-config/

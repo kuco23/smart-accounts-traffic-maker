@@ -5,9 +5,9 @@ from .._user_base import BaseUserBot
 
 MIN_MINTED_LOTS = 1
 
-
 class UserMinterAndRedeemer(BaseUserBot):
-    def mint(self, agent_vault: str, max_minted_lots: int):
+
+    def mint(self, max_minted_lots: int, agent_vault: int = 0):
         xrp_balance = self.ripple.get_balance(self.address)
         xrp_balance_lots = self.utils.uba_to_lots(xrp_balance)
         if xrp_balance_lots > MIN_MINTED_LOTS:

@@ -20,3 +20,8 @@ def mint_redeem(user_count: Optional[int] = 0):
 @app.command()
 def redeem_all():
     raise NotImplemented()
+
+
+@app.command()
+def test():
+    import test

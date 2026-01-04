@@ -54,4 +54,4 @@ LOGGING_CONFIG = {
 
 
 logging.config.dictConfig(LOGGING_CONFIG)
-logger = logging.getLogger("FAssetQA")
+logger = logging.getLogger("SATM")

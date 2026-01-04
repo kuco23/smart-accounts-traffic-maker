@@ -2,6 +2,7 @@ from typing import List
 from time import sleep
 from datetime import datetime
 import attrs
+import traceback
 from threading import Thread
 from qa_lib import DependencyManager
 from qa_lib.utils import logger
@@ -48,5 +49,5 @@ class LoadTest:
                     self.context.simple_user_hive.fund()
                     self._last_fund = now
             except Exception as e:
-                logger.error(f"error while funding: {e}")
+                logger.error(f"error while funding: {e} - {traceback.format_exc()}")
             sleep(CYCLE_FUND_SLEEP_SEC)

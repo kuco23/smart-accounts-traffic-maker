@@ -6,7 +6,6 @@ from .components.chain import (
     RippleClient,
     RippleWallet,
     NativeClient,
-    NativeWallet,
     MasterAccountController,
     FAsset,
 )
@@ -39,22 +38,15 @@ class DependencyManager(metaclass=Singleton):
     @property
     @cached
     def ripple_fund_distributer_wallet(self):
-        return RippleWallet(self.ripple_rpc, self.params.load_test_xrp_distributor_seed)
-
-    @property
-    @cached
-    def native_fund_distributor_wallet(self):
-        return NativeWallet(
-            self.native_chain_client, self.params.load_test_nat_distributor_pvk
-        )
+        return RippleWallet(self.ripple_rpc, self.params.xrp_distributor_seed)
 
     @property
     @cached
     def master_account_controller(self):
         return MasterAccountController(
             self.native_chain_client,
-            self.params._asset_manager_abi,
-            self.params.get_address(self.params.asset_manager_name),
+            self.params._master_account_controller_abi,
+            self.params.config.contracts.master_account_controller_address
         )
 
     @property
@@ -63,14 +55,14 @@ class DependencyManager(metaclass=Singleton):
         return FAsset(
             self.native_chain_client,
             self.params._fasset_abi,
-            self.params.get_address(self.params.fasset_name),
+            self.params.config.contracts.fasset_address,
         )
 
     @property
     @cached
     def simple_user_bots(self) -> List[UserMinterAndRedeemer]:
         ret = []
-        for i, user_config in enumerate(self.utils.user_bots_env()):
+        for i, user_config in enumerate(self.utils.user_env()):
             user_cli = self._user_cli(user_config)
             user_actor = self._get_user_actor(str(i), user_cli)
             ret.append(user_actor)
@@ -84,7 +76,6 @@ class DependencyManager(metaclass=Singleton):
             self.ripple_rpc,
             self.ripple_fund_distributer_wallet,
             self.native_chain_client,
-            self.native_fund_distributor_wallet,
             self.fasset,
             self.simple_user_bots,
         )

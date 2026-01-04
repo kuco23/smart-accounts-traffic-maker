@@ -2,24 +2,20 @@ from typing import List, Dict
 from attrs import frozen
 from os.path import exists
 from qa_lib.components.params import ParamLoader
+from dotenv import dotenv_values
 
 
 @frozen
 class CommonUtils:
     params: ParamLoader
 
-    def user_bots_env(self) -> List[Dict[str, str]]:
+    def user_env(self) -> List[Dict[str, str]]:
         ret = []
         i = 0
         while True:
-            config = self.params.config.load_test.fasset_user_config_file_path.format(i)
-            secrets = self.params.config.load_test.fasset_user_secrets_file_path.format(
-                i
-            )
-            if exists(config) and exists(secrets):
-                ret.append(
-                    {"FASSET_USER_CONFIG": config, "FASSET_USER_SECRETS": secrets}
-                )
+            env_path = self.params.config.load_test.user_config_path.format(i)
+            if exists(env_path):
+                ret.append(dotenv_values(env_path))
             else:
                 break
             i += 1

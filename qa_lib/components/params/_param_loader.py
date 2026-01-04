@@ -2,6 +2,8 @@ from json import load
 from .sources import Constants, Config, Env
 from ...utils import cached
 
+from os import getcwd
+
 
 """
 Abstraction over low level parameter fetching,
@@ -15,22 +17,12 @@ class ParamLoader(Env, Constants):
     def __init__(self):
         self.config = Config.create(self.config_path)
 
-    def get_address(self, name: str) -> str:
-        for contract in self._contracts:
-            if contract["name"] == name:
-                return contract["address"]
-
     @property
     @cached
-    def _contracts(self):
-        return load(open(self.config.contracts.path, "r"))
-
-    @property
-    @cached
-    def _asset_manager_abi(self):
-        return load(open(self.config.contracts.asset_manager_abi, "r"))["abi"]
+    def _master_account_controller_abi(self):
+        return load(open(self.config.contracts.master_account_controller_abi_path, "r"))["abi"]
 
     @property
     @cached
     def _fasset_abi(self):
-        return load(open(self.config.contracts.fasset_abi, "r"))["abi"]
+        return load(open(self.config.contracts.fasset_abi_path, "r"))["abi"]
