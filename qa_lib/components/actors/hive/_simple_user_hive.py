@@ -1,5 +1,6 @@
 from typing import List
 from time import sleep
+from random import choice
 from attrs import frozen
 import traceback
 from qa_lib.utils import logger
@@ -43,13 +44,13 @@ class SimpleUserHive:
             if user_xrp_balance <= xrp_min and user_fxrp_balance <= xrp_min:
                 fund = xrp_target - user_xrp_balance
                 logger.info(
-                    f"funding user {user.id} with {fund} {self.params.asset_name}"
+                    f"funding user {user.id} with {fund} {user.utils.assetn}"
                 )
                 self.ripple_root.send_tx(
                     xrp_target - user_xrp_balance, user.address
                 )
                 logger.info(
-                    f"successfully funded user {user.id} with {fund} {self.params.asset_name}"
+                    f"successfully funded user {user.id} with {fund} {user.utils.assetn}"
                 )
 
     def run_thread(self, i: int):
@@ -62,8 +63,11 @@ class SimpleUserHive:
 
     def run_user_step(self, i: int):
         user = self.users[i]
-        user.mint(MAX_MINTED_LOTS)
+        user.mint(MAX_MINTED_LOTS, self.pick_agent())
         user.redeem_all()
+
+    def pick_agent(self):
+        return choice(self.params.config.load_test.agent_vault_indices)
 
     def on_finish(self):
         for user in self.users:

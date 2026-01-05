@@ -22,7 +22,15 @@ class CommonUtils:
         return ret
 
     def uba_to_lots(self, amount: int) -> int:
-        return amount // self.params.lot_size
+        return amount // self.params.config.chain.lot_size
 
     def uba_to_tokens(self, amount: int) -> float:
-        return amount / 10**self.params.token_decimals
+        return amount / 10 ** self.params.config.chain.fasset_token_decimals
+
+    @property
+    def fassetn(self):
+        return 'FTestXRP'
+
+    @property
+    def assetn(self):
+        return 'testXRP'

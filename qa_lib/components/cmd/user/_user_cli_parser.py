@@ -25,3 +25,7 @@ class UserCliOutputParser(CmdParser):
         if len(data) != 1:
             return ParserOutput(None, msg, True)
         return ParserOutput(CliBridgeResponse(*data), msg, False)
+
+    def collateral_reservation_not_found(self, msg: str) -> ParserOutput[bool]:
+        not_found = 'could not find matching CollateralReserved event' in msg
+        return ParserOutput(not_found, msg, False)

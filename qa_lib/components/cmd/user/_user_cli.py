@@ -3,6 +3,8 @@ from .._cmd import Cmd
 from ._user_cli_parser import UserCliOutputParser
 
 
+MINT_WAIT_CYCLE_SLEEP = 30
+
 class UserCli(Cmd, UserCliOutputParser):
 
     def __init__(
@@ -10,20 +12,19 @@ class UserCli(Cmd, UserCliOutputParser):
         run_dir: str,
         node_path: str,
         executable: str,
-        env: dict[str, str],
+        env: dict[str, str]
     ):
         super().__init__(run_dir, env)
         self.node_path = node_path
         self.executable = executable
 
-    def mint(self, lots: int, agent_vault: int = 0):
-        collateral_reserved = self.reserve_collateral(lots, agent_vault)
-        cli_args = self._bridge_mint_args(collateral_reserved.transaction)
-        raw_resp = self._run(cli_args)
+    def mint(self, transaction: str):
+        args = self._bridge_mint_args(transaction)
+        raw_resp = self._run(args)
         resp = self.parse_bridge_mint_response(raw_resp)
         return self._ensure_parser_response(resp)
 
-    def reserve_collateral(self, lots: int, agent_vault: int = 0):
+    def reserve_collateral(self, lots: int, agent_vault):
         instruction = self._encode_reserve_collateral(lots, agent_vault)
         return self._bridge_instruction(instruction.encoding)
 
@@ -35,7 +36,7 @@ class UserCli(Cmd, UserCliOutputParser):
         instruction = self._encode_redeem(lots)
         return self._bridge_instruction(instruction.encoding)
 
-    def _encode_reserve_collateral(self, lots: int, agent_vault: int = 0):
+    def _encode_reserve_collateral(self, lots: int, agent_vault):
         cli_args = self._encode_collateral_reserved_args(lots, agent_vault)
         return self._encode(cli_args)
 
@@ -66,7 +67,7 @@ class UserCli(Cmd, UserCliOutputParser):
         return ["bridge", "instruction", instruction]
 
     @staticmethod
-    def _encode_collateral_reserved_args(lots: int, agent_vault: int = 0):
+    def _encode_collateral_reserved_args(lots: int, agent_vault: int):
         return ["encode", "fxrp-cr", "-w", "0", "-v", str(lots), "-a", str(agent_vault)]
 
     @staticmethod

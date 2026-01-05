@@ -1,3 +1,4 @@
+from typing import List
 from toml import load
 from pydantic.dataclasses import dataclass
 from dacite import from_dict
@@ -16,17 +17,16 @@ class ContractConfig:
 
 @dataclass
 class ChainConfig:
-    native_token_name: str
-    fasset_name: str
-    asset_name: str
-    lot_size: str
-    fasset_decimals: str
+    lot_size: int
+    fasset_token_decimals: int
 
 @dataclass
 class LoadTestConfig:
     user_config_path: str
     user_target_xrp_balance: int
     user_min_xrp_balance: int
+    operator_wait_time: int
+    agent_vault_indices: List[int]
 
 @dataclass
 class Config:

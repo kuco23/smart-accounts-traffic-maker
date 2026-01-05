@@ -85,7 +85,7 @@ class DependencyManager(metaclass=Singleton):
             self.params.run_dir,
             self.params.config.os.python_path,
             self.params.smart_accounts_cli_path,
-            env,
+            env
         )
 
     def _get_user_actor(self, _id: str, user_cli: UserCli):
