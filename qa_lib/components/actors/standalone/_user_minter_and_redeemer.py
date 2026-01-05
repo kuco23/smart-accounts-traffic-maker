@@ -52,7 +52,8 @@ class UserMinterAndRedeemer(BaseUserBot):
             try:
                 return self.cli.mint(collateral_reserved.transaction)
             except Exception as e:
-                if self.cli.collateral_reservation_not_found(str(e)):
+                if not self.cli.collateral_reservation_not_found(str(e)):
+                    # unknown exception
                     break
                 logger.warning(f'collateral reservation not yet found')
         raise Exception(f'mint for {lots} lots failed')

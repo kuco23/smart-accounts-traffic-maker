@@ -14,5 +14,5 @@ services:
       XRP_DISTRIBUTOR_SEED: ${XRP_DISTRIBUTOR_SEED}
     volumes:
       - ${CONFIG}:/app/config.toml
-      - ./user-config-path:/app/user-config-path
+      - ./accounts:/app/accounts
       - ./smart-accounts-logs:/app/logs

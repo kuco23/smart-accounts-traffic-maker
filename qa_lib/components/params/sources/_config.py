@@ -23,6 +23,7 @@ class ChainConfig:
 @dataclass
 class LoadTestConfig:
     user_config_path: str
+    cycle_sleep_secs: int
     user_target_xrp_balance: int
     user_min_xrp_balance: int
     operator_wait_time: int

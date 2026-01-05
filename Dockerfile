@@ -42,6 +42,7 @@ COPY --from=submodule /app/smart_accounts_cli ./smart_accounts_cli
 # Copy python executables
 COPY --from=build /app/qa_lib/ ./qa_lib/
 COPY --from=build /app/cli/ ./cli/
+COPY --from=build /app/artifacts/ ./artifacts/
 
 # copy entrypoint
 COPY --from=build /app/entrypoint.sh ./entrypoint.sh

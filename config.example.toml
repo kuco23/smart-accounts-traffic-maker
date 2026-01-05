@@ -13,6 +13,7 @@ lot_size = 10000000
 
 [load_test]
 user_config_path = './accounts/users/user{0}/.env'
+cycle_sleep_secs = 60
 user_min_xrp_balance = 20
 user_target_xrp_balance = 100
 operator_wait_time = 540

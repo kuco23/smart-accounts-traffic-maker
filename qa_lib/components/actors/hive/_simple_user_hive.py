@@ -17,7 +17,6 @@ from ..standalone import UserMinterAndRedeemer
 MAX_MINTED_LOTS = 4
 XRP_DROP_FACTOR = 10**6
 NAT_WEI_FACTOR = 10**18
-CYCLE_SLEEP_SEC = 10
 
 @frozen
 class SimpleUserHive:
@@ -59,7 +58,7 @@ class SimpleUserHive:
                 self.run_user_step(i)
             except Exception as e:
                 logger.error(f"error when running user {i}:", e, traceback.format_exc())
-            sleep(CYCLE_SLEEP_SEC)
+            sleep(self.params.config.load_test.cycle_sleep_secs)
 
     def run_user_step(self, i: int):
         user = self.users[i]
