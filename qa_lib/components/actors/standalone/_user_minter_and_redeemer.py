@@ -39,8 +39,8 @@ class UserMinterAndRedeemer(BaseUserBot):
 
     @property
     def fassetn(self):
-        return self.params.fasset_name
+        return self.params.config.chain.fasset_name
 
     @property
     def assetn(self):
-        return self.params.asset_name
+        return self.params.config.chain.asset_name

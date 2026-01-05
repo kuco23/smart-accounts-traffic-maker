@@ -4,27 +4,36 @@ from dacite import from_dict
 
 
 @dataclass
-class Os:
+class OsConfig:
     python_path: str
 
 @dataclass
-class ConfigContracts:
+class ContractConfig:
     fasset_address: str
     fasset_abi_path: str
     master_account_controller_abi_path: str
     master_account_controller_address: str
 
 @dataclass
-class ConfigLoadTest:
+class ChainConfig:
+    native_token_name: str
+    fasset_name: str
+    asset_name: str
+    lot_size: str
+    fasset_decimals: str
+
+@dataclass
+class LoadTestConfig:
     user_config_path: str
     user_target_xrp_balance: int
     user_min_xrp_balance: int
 
 @dataclass
 class Config:
-    os: Os
-    contracts: ConfigContracts
-    load_test: ConfigLoadTest
+    os: OsConfig
+    contracts: ContractConfig
+    chain: ChainConfig
+    load_test: LoadTestConfig
 
     @classmethod
     def create(cls, config_path: str):

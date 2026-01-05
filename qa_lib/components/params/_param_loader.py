@@ -2,14 +2,11 @@ from json import load
 from .sources import Constants, Config, Env
 from ...utils import cached
 
-from os import getcwd
-
 
 """
 Abstraction over low level parameter fetching,
 adding some transformers and utilities.
 """
-
 
 class ParamLoader(Env, Constants):
     config: Config

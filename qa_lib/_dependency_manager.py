@@ -85,7 +85,6 @@ class DependencyManager(metaclass=Singleton):
             self.params.run_dir,
             self.params.config.os.python_path,
             self.params.smart_accounts_cli_path,
-            self.params.fasset_name,
             env,
         )
 

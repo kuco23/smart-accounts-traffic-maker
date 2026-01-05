@@ -10,13 +10,11 @@ class UserCli(Cmd, UserCliOutputParser):
         run_dir: str,
         node_path: str,
         executable: str,
-        fasset: str,
         env: dict[str, str],
     ):
         super().__init__(run_dir, env)
         self.node_path = node_path
         self.executable = executable
-        self.fasset = fasset
 
     def mint(self, lots: int, agent_vault: int = 0):
         collateral_reserved = self.reserve_collateral(lots, agent_vault)
